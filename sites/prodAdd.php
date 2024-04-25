@@ -11,7 +11,7 @@
 
     
     <p>DODAJ PRODUKT</p>
-    <form method="POST" enctype="multipart/form-data" action="/script/dodajProdukt.php">
+    <form method="POST" enctype="multipart/form-data" action="/script/dodajProdukt.php" target="">
         <table>
             <tr>
                 <td>Nazwa</td>
@@ -63,7 +63,7 @@
             <tr>
                 <td>zdjęcia</td>
                 <td>
-                <input name="zdjecia" type="file" onchange="previewImages(this)" multiple>
+                <input name="zdjecia[]" type="file" onchange="previewImages(this)" multiple>
                 <div id="zdjecia"></div>
                 </td>
             </tr>        
@@ -71,11 +71,11 @@
                 <td><input type="submit"></td>
             </tr>    
         <table>
-        <iframe name="dodajProduktRes" height="40px"></iframe>
+        
 
 
     </form>
-
+    <iframe name="dodajProduktRes" height="40px"></iframe>
 
     
 
@@ -91,12 +91,7 @@
     <iframe name="wynikKategoria" height="40px"></iframe>
     
 
-    <!-- <?php
-
-    // $DR = $_SERVER['DOCUMENT_ROOT'];
-    // require("$DR/script/dodajKategorie.php");
-
-    ?> -->
+    
 
     <hr>
     <p>DODAJ PRODUCENTA</p>

@@ -6,6 +6,7 @@
 $connect=mysqli_connect("localhost","root","","sklep");
 $query = "SELECT * FROM produkt WHERE ";
 
+// Tworzenie zapytania
 
 if(isset($_GET["katID"])){
     $szukanaKategoriaID = $_GET["katID"];
@@ -31,11 +32,11 @@ if(isset($_GET["ava"])){
     $query = $query."ilosc_magazyn > 0";
 }
 
+// Poprawianie zapytania 
+
 if(str_ends_with($query,"AND ")){
     substr($query,0,-4);
 }
-
-
 
 if(str_ends_with($query,"WHERE ")){
     $query = substr($query,0,-6);
@@ -44,6 +45,14 @@ if(str_ends_with($query,"WHERE ")){
 
 
 echo $query;
+
+$lista = $connect->query($query);
+
+
+print_r($lista);
+
+
+//upofrządkować dane + testy 
 
 
 
