@@ -5,6 +5,9 @@ print_r($_POST);
 print_r($_FILES);
 echo "</pre>";
 $DR = $_SERVER['DOCUMENT_ROOT'];
+$flagaerr = 0;
+$pathZdjecieGlowne = 0;
+$pathZdjecia = array();
 
 
 if(isset($_POST["produktNazwa"])){
@@ -44,9 +47,12 @@ if(isset($_POST["produktNazwa"])){
             echo $target_dir.$fileNameOnDb;
             if (move_uploaded_file($tmp_name, $target_dir.$fileNameOnDb)) {
                 echo "Plik ".$fileNameOnDb. " został wysłany na serwer.";
+                $pathZdjecieGlowne = $fileNameOnDb;
             } else {
                 echo "Nie udało się wysłać pliku.";
             }
+        } else{
+            $flagaerr = 1;
         }
     }
 
@@ -97,9 +103,12 @@ if(isset($_POST["produktNazwa"])){
             if(!$errors){
                 if (move_uploaded_file($tmp_name, $target_dir.$fileNameOnDb)) {
                 echo "Plik ".$fileNameOnDb. " został wysłany na serwer.";
+                $pathZdjecia[] = $fileNameOnDb;
                 } else {
                 echo "Nie udało się wysłać pliku.";
                 }
+            }else{
+                $flagaerr = 1;
             }
             
             $errors = array();
@@ -108,6 +117,31 @@ if(isset($_POST["produktNazwa"])){
 
 
 
+
+
+
+
+    if($flagaerr == 0){
+
+        $produktKategoriaId = $_POST['produktKategoria'];
+        $produktNazwa = $_POST['produktNazwa'];
+        $iloscMagazyn = $_POST['iloscMagazyn'];
+        $cenaBrutto = $_POST['cenaBrutto'];
+        $produktOpis = $_POST['opis'];
+        $produktProducent = $_POST['produktProducent'];
+
+        $query = "INSERT INTO produkt (nazwa, kategoria_id, ilosc_magazyn, cena_brutto, zdj_glowne, opis, producent_id) VALUES ('$produktNazwa', $produktKategoriaId, $iloscMagazyn, $cenaBrutto, '$pathZdjecieGlowne', '$produktOpis', $produktProducent)";
+        echo $query;
+        $connect->query($query);
+        $query = "SELECT LAST_INSERT_ID() as lastId";
+        $lastId = $connect->query($query);
+        $lastId = $lastId->fetch_object()->lastId;
+        foreach($pathZdjecia as $zdjecia){
+            $query = "INSERT INTO zdjecia (produkt_id, nazwaPliku) VALUES ($lastId, '$zdjecia')";
+            $connect->query($query);
+        }
+    }
+    
 
 
     //przetestować, zrobić wysyłanie plików dal zdjecia, stworzyć zapytanie, przetestować ostatecznie
