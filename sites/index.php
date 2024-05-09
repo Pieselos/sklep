@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="/style/main.css">
 
 </head>
-<body class="bg-dark">
-    <script src="../bootstrap/js/bootstrap.js"></script>
-    <div class="container">
+<body>
+    
+    <!-- <div class="container">
         <div> 
            
             <li class="card bg-dark" style="width: 18rem;">
@@ -25,6 +25,14 @@
             </li>
             
         </div>
+    </div> -->
+    <div class="container">
+    <?php
+        require("../script/wyswietlWszystkoKarty.php")
+
+    ?>
     </div>
+    <script src="../bootstrap/js/bootstrap.js"></script>
+
 </body>
 </html>

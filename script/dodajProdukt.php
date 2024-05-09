@@ -31,13 +31,13 @@ if(isset($_POST["produktNazwa"])){
         //sprawdzenie rozszerzenia pliku
         $file_name_array =explode('.', $file_name);
         $file_ext = strtolower(end($file_name_array));
-        $extensions = array("jpeg","jpg","jfif","jpe","img","webp");
+        $extensions = array("jpeg","jpg","jfif","jpe","img","webp","png");
         if(in_array($file_ext, $extensions) === false){
             $errors[]="Błędne rozszerzenie.";
         }
        
-        $fileNameOnDb = date('Y-m-d-H_i_s')."-".$_POST['produktNazwa']."-zdjecieGlowne.".$file_ext;
-
+        $fileNameOnDb = date('Y-m-d-H_i')."-".$_POST['produktNazwa']."-zdjecieGlowne.".$file_ext;
+        $pathZdjecieGlowne = $fileNameOnDb;
         //wypisanie ewentualnych błędów
         echo "<pre>";
         print_r($errors);
@@ -47,9 +47,10 @@ if(isset($_POST["produktNazwa"])){
             echo $target_dir.$fileNameOnDb;
             if (move_uploaded_file($tmp_name, $target_dir.$fileNameOnDb)) {
                 echo "Plik ".$fileNameOnDb. " został wysłany na serwer.";
-                $pathZdjecieGlowne = $fileNameOnDb;
+                
             } else {
                 echo "Nie udało się wysłać pliku.";
+                $flagaerr = 1;
             }
         } else{
             $flagaerr = 1;
@@ -81,7 +82,7 @@ if(isset($_POST["produktNazwa"])){
             //sprawdzenie rozszerzenia pliku
             $file_name_array =explode('.', $file_name);
             $file_ext = strtolower(end($file_name_array));
-            $extensions = array("jpeg","jpg","jfif","jpe","img","webp");
+            $extensions = array("jpeg","jpg","jfif","jpe","img","webp","png");
             if(in_array($file_ext, $extensions) === false){
                 $errors[]="Błędne rozszerzenie, wybierz plik jpeg, jpg lub png.";
             }
@@ -92,7 +93,7 @@ if(isset($_POST["produktNazwa"])){
                 $errors[]="Taki plik już istnieje.";
             }
 
-            $fileNameOnDb = date('Y-m-d-H_i_s')."-".$_POST['produktNazwa']."-$i.".$file_ext;
+            $fileNameOnDb = date('Y-m-d-H_i')."-".$_POST['produktNazwa']."-$i.".$file_ext;
             
             
             //wypisanie ewentualnych błędów
