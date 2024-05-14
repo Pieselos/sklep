@@ -7,9 +7,7 @@
 </head>
 <body>
     
-<?php
-    header("localhost/sites/index.php");
-?>
+
 
 
 
