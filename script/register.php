@@ -22,19 +22,19 @@
     $query = "INSERT INTO user (email, login, haslo) VALUES ('$email', '$login', '$hash')";
     if($err){
         
-        // foreach($err as $error){
-        //     echo "$error";
-        // }
-        header("http://localhost/sites/register.php");
-        exit();
+        foreach($err as $error){
+            echo "$error";
+        }
+        header("Location: http://localhost/sites/register.php");
+        exit;
     }else{
         $connect->query($query);
         if($connect->errno == 0){
-            header("http://localhost/sites/login.php");
-            exit();
+            header("Location: http://localhost/sites/login.php");
+            exit;
         }else{
-            header("http://localhost/sites/register.php");
-            exit();
+            header("Location: http://localhost/sites/register.php");
+            exit;
         }
         echo "nie ma bledow";
     }

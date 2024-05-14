@@ -7,9 +7,14 @@
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/style/main.css">
 
+    
 </head>
 <body>
-    
+    <?php 
+        require('../script/root.php');
+        session_start();
+        
+    ?>
     <!-- <div class="container">
         <div> 
            

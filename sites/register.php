@@ -10,6 +10,7 @@
         <input placeholder="email" name="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" require>
         <input placeholder="login" name="login" maxlength="20" require>
         <input type="password" placeholder="password" name="password" require>
+        
         <input type="submit">
     </form>
 </body>
