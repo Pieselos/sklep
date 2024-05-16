@@ -20,7 +20,6 @@
             
             $sesjaUser = $_SESSION['user'];
             echo <<<et
-
                 Witaj $sesjaUser
             et;
         }
@@ -36,17 +35,22 @@
     ?>
     
         <ul>
-            
-            <ul>
-                <form method="post" action="../script/zmienAdres.php">
-                    <li>Adres</li>
-                    <li><label><input name="adres" maxlength="30" value="<?=$adresBaza?>" require> Adres</label></li>
-                    <li><label><input name="kodPocztowy" pattern="[0-9]{2}-[0-9]{3}" value="<?=$kodBaza?>" require> Kod pocztowy</label></li>
-                    <li><label><input name="miasto" maxlength="30" value="<?=$miastoBaza?>" require> Miasto</label></li>
-                    <input type="hidden" name="user" value="<?=$sesjaUser?>">
-                    <input type="submit">
+            <li>
+                <ul>
+                    <form method="post" action="../script/zmienAdres.php">
+                        <li>Adres</li>
+                        <li><label><input name="adres" maxlength="30" value="<?=$adresBaza?>" require> Adres</label></li>
+                        <li><label><input name="kodPocztowy" pattern="[0-9]{2}-[0-9]{3}" value="<?=$kodBaza?>" require> Kod pocztowy</label></li>
+                        <li><label><input name="miasto" maxlength="30" value="<?=$miastoBaza?>" require> Miasto</label></li>
+                        <input type="submit" value="Zmień adres">
+                    </form>
+                </ul>
+            </li>
+            <li>
+                <form method="post" action="../script/zmienTelefon.php">
+                    <input name="telefon" pattern="(\+48)?[0-9]{9}" value='<?=$telefonBaza?>'><input type="submit" value="Zmien telefon">
                 </form>
-            </ul>
+            </li>
         </ul>
     
 </body>
