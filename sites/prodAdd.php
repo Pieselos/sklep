@@ -9,7 +9,13 @@
 </head>
 <body>
 
-    
+    <?php
+        session_start();
+        if (empty($_SESSION['admin'])){
+            header('Location: http://localhost/sites/admin.php');
+            exit;
+        }
+    ?>
     <p>DODAJ PRODUKT</p>
     <form method="POST" enctype="multipart/form-data" action="/script/dodajProdukt.php" target="">
         <table>
