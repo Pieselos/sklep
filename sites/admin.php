@@ -7,9 +7,18 @@
 </head>
 <body>
     
+    <?php
+
+        session_start();
 
 
 
+    ?>
+
+    <form action="../script/loginAdmin.php">
+        <input name="login" type="text">
+        <input name="password" type="password">
+    </form>
 
 
 </body>

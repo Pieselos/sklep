@@ -1,0 +1,2 @@
+sklep sum tak zwany olimpijczyk : bo sum to król wód
+INSERT INTO produktzamowienie (produkt_id, ilosc_zamowienie, zamowienie_id) SELECT produkt_id, ilosc_koszyk, 5 FROM produktKoszyk;
