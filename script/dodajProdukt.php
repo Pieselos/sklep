@@ -1,9 +1,9 @@
 <?php
 
-echo "<pre>";
-print_r($_POST);
-print_r($_FILES);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_POST);
+// print_r($_FILES);
+// echo "</pre>";
 $DR = $_SERVER['DOCUMENT_ROOT'];
 $flagaerr = 0;
 $pathZdjecieGlowne = 0;
@@ -14,11 +14,11 @@ if(isset($_POST["produktNazwa"])){
     $connect=mysqli_connect("localhost","root","","sklep");
     
     if(isset($_FILES['zdjGlowne'])){
-        echo "Typ pliku: ".$_FILES['zdjGlowne']['type']."<br>";
-        echo "Rozmiar pliku: ".$_FILES['zdjGlowne']['size']."<br>";
-        echo "Nazwa pliku: ".$_FILES['zdjGlowne']['name']."<br>";
-        echo "Nazwa tymczasowa: ".$_FILES['zdjGlowne']['tmp_name']."<br>";
-        echo "Błędy: ".$_FILES['zdjGlowne']['error']."<br>";
+        // echo "Typ pliku: ".$_FILES['zdjGlowne']['type']."<br>";
+        // echo "Rozmiar pliku: ".$_FILES['zdjGlowne']['size']."<br>";
+        // echo "Nazwa pliku: ".$_FILES['zdjGlowne']['name']."<br>";
+        // echo "Nazwa tymczasowa: ".$_FILES['zdjGlowne']['tmp_name']."<br>";
+        // echo "Błędy: ".$_FILES['zdjGlowne']['error']."<br>";
         $file_name = $_FILES['zdjGlowne']['name'];
         
     
@@ -39,12 +39,12 @@ if(isset($_POST["produktNazwa"])){
         $fileNameOnDb = date('Y-m-d-H_i')."-".$_POST['produktNazwa']."-zdjecieGlowne.".$file_ext;
         $pathZdjecieGlowne = $fileNameOnDb;
         //wypisanie ewentualnych błędów
-        echo "<pre>";
-        print_r($errors);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r($errors);
+        // echo "</pre>";
         //wysłanie pliku na serwer
         if(!$errors){
-            echo $target_dir.$fileNameOnDb;
+            // echo $target_dir.$fileNameOnDb;
             if (move_uploaded_file($tmp_name, $target_dir.$fileNameOnDb)) {
                 echo "Plik ".$fileNameOnDb. " został wysłany na serwer.";
                 
@@ -64,11 +64,11 @@ if(isset($_POST["produktNazwa"])){
             echo $i+1;
             echo " plik<br>";
 
-            echo "Typ pliku: ".$_FILES['zdjecia']['type'][$i]."<br>";
-            echo "Rozmiar pliku: ".$_FILES['zdjecia']['size'][$i]."<br>";
-            echo "Nazwa pliku: ".$_FILES['zdjecia']['name'][$i]."<br>";
-            echo "Nazwa tymczasowa: ".$_FILES['zdjecia']['tmp_name'][$i]."<br>";
-            echo "Błędy: ".$_FILES['zdjecia']['error'][$i]."<br>";
+            // echo "Typ pliku: ".$_FILES['zdjecia']['type'][$i]."<br>";
+            // echo "Rozmiar pliku: ".$_FILES['zdjecia']['size'][$i]."<br>";
+            // echo "Nazwa pliku: ".$_FILES['zdjecia']['name'][$i]."<br>";
+            // echo "Nazwa tymczasowa: ".$_FILES['zdjecia']['tmp_name'][$i]."<br>";
+            // echo "Błędy: ".$_FILES['zdjecia']['error'][$i]."<br>";
             $file_name = $_FILES['zdjecia']['name'][$i];
             
 
@@ -132,7 +132,7 @@ if(isset($_POST["produktNazwa"])){
         $produktProducent = $_POST['produktProducent'];
 
         $query = "INSERT INTO produkt (nazwa, kategoria_id, ilosc_magazyn, cena_brutto, zdj_glowne, opis, producent_id) VALUES ('$produktNazwa', $produktKategoriaId, $iloscMagazyn, $cenaBrutto, '$pathZdjecieGlowne', '$produktOpis', $produktProducent)";
-        echo $query;
+        // echo $query;
         $connect->query($query);
         $query = "SELECT LAST_INSERT_ID() as lastId";
         $lastId = $connect->query($query);

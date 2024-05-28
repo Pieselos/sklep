@@ -8,7 +8,7 @@
     <!-- <script src="../script/previewImages.js"></script> -->
 </head>
 <body>
-
+    <a href="admin.php">admin.php</a>
     <?php
         session_start();
         if (empty($_SESSION['admin'])){
@@ -17,7 +17,7 @@
         }
     ?>
     <p>DODAJ PRODUKT</p>
-    <form method="POST" enctype="multipart/form-data" action="/script/dodajProdukt.php" target="">
+    <form method="POST" enctype="multipart/form-data" action="/script/dodajProdukt.php" target="dodajProduktRes">
         <table>
             <tr>
                 <td>Nazwa</td>
@@ -104,7 +104,7 @@
     
     <form method="POST" action="/script/dodajProducenta.php" target="wynikProducent">
         
-        Nazwa kategorii <input name="nazwa_producent" minlength="4" required><br>
+        Nazwa producenta <input name="nazwa_producent" minlength="4" required><br>
         <input type="submit">
     </form><br>
     <iframe name="wynikProducent" height="40px"></iframe>
