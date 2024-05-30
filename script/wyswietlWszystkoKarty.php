@@ -5,10 +5,7 @@
     $result = $connect->query($query);
     $domena = "localhost";
     while($row = $result->fetch_object()){
-        echo "<pre>";
-        print_r($row);
-        echo "</pre>";
-
+        
 
         echo<<<et
 

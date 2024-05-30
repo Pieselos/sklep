@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        img{
+            height: 50px;
+            width: 50px;
+        }
+    </style>
 </head>
 <body>
     <?php
@@ -12,15 +18,18 @@
     if($flagaPusty){
         echo "Koszyk jest pusty";
     }else{
+        echo "<pre>";
+        print_r($_POST);
+        echo "</pre>";
         echo<<<et
-
-            <tr>
-                <th></th>
-                <th>Produkt</th>
-                <th>Ilość</th>
-                <th>Cena</th>
-                <th></th>
-            </tr>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Produkt</th>
+                    <th>Ilość</th>
+                    <th>Cena</th>
+                    <th></th>
+                </tr>
 
         et;
     
@@ -38,7 +47,7 @@
                     <td>$ilosc</td>
                     <td>$cena</td>
                     <td>
-                        <form action="../script/manipulacjeKoszykiem.php">
+                        <form action="../script/manipulacjeKoszykiem.php" method="post">
                             <input type="hidden" name="produktKoszykId" value="$idProduktKoszk">
                             <input type="submit" name="kontrola" value="+">
                             <input type="submit" name="kontrola" value="-">
