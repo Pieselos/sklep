@@ -6,9 +6,14 @@ if(empty($_SESSION['user'])){
     exit;
 }else{
     
+    
     $produktKoszyk_id = $_POST['produktKoszykId'];
     $kontrola = $_POST['kontrola'];
     $connect=mysqli_connect("localhost","root","","sklep");
+
+
+    
+
     if($kontrola == 'usun'){
        
         $query = "DELETE FROM produktkoszyk WHERE produktKoszyk_id = $produktKoszyk_id";
@@ -19,8 +24,9 @@ if(empty($_SESSION['user'])){
     if($kontrola == '+'){
         $query = "UPDATE produktkoszyk SET ilosc_koszyk = ilosc_koszyk + 1 WHERE produktKoszyk_id = $produktKoszyk_id";
         $connect->query($query);
-        header("Location: http://localhost/sites/koszyk.php");
-        exit;
+        $query = "SELECT koszyk_id FROM produktkoszyk WHERE produktkoszyk_id = $produktKoszyk_id";
+        $koszykId = $connect->query($query)->fetch_object()->koszyk_id;
+        require('../script/koszykSprawdzianieIlosci.php');
     }
     if($kontrola == '-'){
         $query = "UPDATE produktkoszyk SET ilosc_koszyk = ilosc_koszyk - 1 WHERE produktKoszyk_id = $produktKoszyk_id";
@@ -31,7 +37,11 @@ if(empty($_SESSION['user'])){
             $query = "DELETE FROM produktkoszyk WHERE produktKoszyk_id = $produktKoszyk_id";
             $connect->query($query);
         }
-        header("Location: http://localhost/sites/koszyk.php");
-        exit;
+        
     }
+    
+    
+    
+    header("Location: http://localhost/sites/koszyk.php");
+    exit;
 }

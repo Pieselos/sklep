@@ -15,12 +15,11 @@
     <?php
     
     require("../script/wyswietlkoszyk.php");
+    require("../script/koszykSprawdzianieIlosci.php");
+    $cenaCalosc = 0;
     if($flagaPusty){
         echo "Koszyk jest pusty";
     }else{
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
         echo<<<et
             <table>
                 <tr>
@@ -39,13 +38,14 @@
             $cena = $ilosc*$cenaArray[$i];
             $idProduktKoszk = $idProduktKoszykArray[$i];
             $nazwa = $nazwaArray[$i];
+            $cenaCalosc = $cenaCalosc + $cena;
             echo<<<et
 
                 <tr>
                     <td><img src="$zdjecie"></td>
                     <td>$nazwa</td>
                     <td>$ilosc</td>
-                    <td>$cena</td>
+                    <td>$cena zł</td>
                     <td>
                         <form action="../script/manipulacjeKoszykiem.php" method="post">
                             <input type="hidden" name="produktKoszykId" value="$idProduktKoszk">
@@ -58,7 +58,9 @@
 
             et;
         }
+        echo "<td></td> <td></td> <td></td> <td>$cenaCalosc zł</td> <td></td> ";
         echo "</table>";
+        echo "<a href='zamowienie.php'><button>Zamów</button></a>";
     }
     
     ?>
