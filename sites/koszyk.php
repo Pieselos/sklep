@@ -55,16 +55,31 @@
                         </form>
                     </td>
                 </tr>
+                
 
             et;
         }
         echo "<td></td> <td></td> <td></td> <td>$cenaCalosc zł</td> <td></td> ";
         echo "</table>";
-        echo "<a href='zamowienie.php'><button>Zamów</button></a>";
+
+        
     }
     
     ?>
-
+    <form method="POST" action="zamowienie.php">
+        <table>
+            <tr>
+                <td><label><input type="radio" name="przesylka" value="paczkomat" required> Inpost (10 zł)</label></td>
+            </tr> 
+            <tr>
+                <td><label><input type="radio" name="przesylka" value="dhl"  required> DHL (13 zł)</label><br></td>
+            </tr>   
+            <tr>
+                <td><label><input type="radio" name="przesylka" value="dpd"required> DPD (15 zł)</label><br></td>
+            </tr>
+            <td><input type="submit" value="Zamów"></td>
+        </table>
+    </form>
 
    
 </body>

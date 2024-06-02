@@ -23,7 +23,8 @@
         require("../script/koszykSprawdzianieIlosci.php");
         $cenaCalosc = 0;
         if($flagaPusty){
-            echo "Nie ma nic do zamówienia";
+            echo "Nie ma nic do zamówienia<br>";
+            echo "<a href='../sites/index.php'>Wróć</a>";
         }else{
             echo<<<et
                 <table>
@@ -65,10 +66,11 @@
         $kodBaza = $result->kod_pocztowy;
         $miastoBaza = $result->miasto;
         $telefonBaza = $result->telefon;
+        $przesylka = $_POST['przesylka']
 
     ?>
 
-    <form method="post" action="../script/zmienAdres.php">
+    <form method="post" action="../script/zamow.php">
         
         <label><input name="adres" maxlength="30" value="<?=$adresBaza?>" require> Adres</label><br>
         <label><input name="kodPocztowy" pattern="[0-9]{2}-[0-9]{3}" value="<?=$kodBaza?>" require> Kod pocztowy</label><br>
@@ -76,18 +78,13 @@
         
         <div>
             Płatność:<br>
-            <label><input type="radio" name="platnosc" value="blik"> Blik</label><br>
-            <label><input type="radio" name="platnosc" value="karta"> Karta</label><br>
-            <label><input type="radio" name="platnosc" value="gotuwa"> Gotówka</label><br>
+            <label><input type="radio" name="platnosc" value="blik" required> Blik</label><br>
+            <label><input type="radio" name="platnosc" value="karta" required> Karta</label><br>
+            <label><input type="radio" name="platnosc" value="gotuwa" required> Gotówka</label><br>
         </div>
 
-        <div>
-            Przesyłka:<br>
-            <label><input type="radio" name="przesylka" value="paczkomat"> Paczkomat</label><br>
-            <label><input type="radio" name="przesylka" value="dhl"> DHL</label><br>
-            <label><input type="radio" name="przesylka" value="dpd"> DPD</label><br>
-        </div>
-            
+        <input type="hidden" name="przesylka" value="<?=$przesylka?>">
+
         <div>
             <input type="submit" value="Zamów">
         </div>
