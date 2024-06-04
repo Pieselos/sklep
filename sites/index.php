@@ -9,11 +9,22 @@
 
     
 </head>
-<body>
+<body >
     <?php 
         require('../script/root.php');
         session_start();
         
+    ?>
+    <a href="koszyk.php">koszyk</a>
+    <a href="ustawieniaKonta.php">Ustawienia konta</a>
+    <a href='szukaj.php'>Szukaj</a>
+    <?php
+        if(empty($_SESSION['user'])){
+            echo "<a href='login.php'>Login</a>";
+        }else{
+            echo "<a href='logout.php'>logout</a>";
+        }
+
     ?>
     <!-- <div class="container">
         <div> 
@@ -31,7 +42,7 @@
             
         </div>
     </div> -->
-    <div class="container">
+    <div class="container" style="display: flex;">
     <?php
         require("../script/wyswietlWszystkoKarty.php")
 

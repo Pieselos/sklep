@@ -11,6 +11,11 @@
         table{
             border-collapse: collapse;
         }
+        
+        img{
+            height: 50px;
+            width: 50px;
+        }
     </style>
 </head>
 <body>

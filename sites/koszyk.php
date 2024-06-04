@@ -12,6 +12,19 @@
     </style>
 </head>
 <body>
+    <a href="koszyk.php">koszyk</a>
+    <a href="ustawieniaKonta.php">Ustawienia konta</a>
+    <a href='szukaj.php'>Szukaj</a>
+    <a href="index.php">Index</a>
+    <?php
+        if(empty($_SESSION['user'])){
+            echo "<a href='login.php'>Login</a>";
+        }else{
+            echo "<a href='logout.php'>logout</a>";
+        }
+
+    ?>
+    <br>
     <?php
     
     require("../script/wyswietlkoszyk.php");
@@ -19,6 +32,7 @@
     $cenaCalosc = 0;
     if($flagaPusty){
         echo "Koszyk jest pusty";
+        exit;
     }else{
         echo<<<et
             <table>
@@ -36,19 +50,20 @@
             $zdjecie = $zdjeciaArray[$i];
             $ilosc = $iloscArray[$i];
             $cena = $ilosc*$cenaArray[$i];
-            $idProduktKoszk = $idProduktKoszykArray[$i];
+            $idProdukt = $idProduktArray[$i];
             $nazwa = $nazwaArray[$i];
             $cenaCalosc = $cenaCalosc + $cena;
+            $idProduktKoszyk = $produktKoszykIdArray[$i];
             echo<<<et
 
                 <tr>
                     <td><img src="$zdjecie"></td>
-                    <td>$nazwa</td>
+                    <td><a href="http://localhost/sites/produkt.php?id=$idProdukt">$nazwa</a></td>
                     <td>$ilosc</td>
                     <td>$cena zł</td>
                     <td>
                         <form action="../script/manipulacjeKoszykiem.php" method="post">
-                            <input type="hidden" name="produktKoszykId" value="$idProduktKoszk">
+                            <input type="hidden" name="produktKoszykId" value="$idProduktKoszyk">
                             <input type="submit" name="kontrola" value="+">
                             <input type="submit" name="kontrola" value="-">
                             <input type="submit" name="kontrola" value="usun">
@@ -69,7 +84,7 @@
     <form method="POST" action="zamowienie.php">
         <table>
             <tr>
-                <td><label><input type="radio" name="przesylka" value="paczkomat" required> Inpost (10 zł)</label></td>
+                <td><label><input type="radio" name="przesylka" value="inpost" required> Inpost (10 zł)</label></td>
             </tr> 
             <tr>
                 <td><label><input type="radio" name="przesylka" value="dhl"  required> DHL (13 zł)</label><br></td>

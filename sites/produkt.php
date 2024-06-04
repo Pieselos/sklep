@@ -12,6 +12,19 @@
     </style>
 </head>
 <body>
+    <a href="koszyk.php">koszyk</a>
+    <a href="ustawieniaKonta.php">Ustawienia konta</a>
+    <a href='szukaj.php'>Szukaj</a>
+    <a href='index.php'>Index</a>
+    
+    <?php
+        if(empty($_SESSION['user'])){
+            echo "<a href='login.php'>Login</a>";
+        }else{
+            echo "<a href='logout.php'>logout</a>";
+        }
+
+    ?>
     <?php
         session_start();
         $connect=mysqli_connect("localhost","root","","sklep");
@@ -39,25 +52,42 @@
             Cena: $info->cena_brutto <br>
             opis: $info->opis <br>
         et;
-
+       
         if(empty($_SESSION['user'])){
-            echo<<<et
+            if($info->ilosc_magazyn != '0'){
+                    echo<<<et
                 
-            <form action="login.php">
-                <input type="submit" value="Dodaj do koszyka">
-            </form>
-            et;
-        }else{
+                    <form action="login.php">
+                        <input type="submit" value="Dodaj do koszyka">
+                    </form>
+                et;
+            }else {
+                echo<<<et
+            
+                    <form action="login.php">
+                        <input type="submit" value="Dodaj do koszyka" disabled> Nie ma produktu na stanie
+                    </form>
+                et; 
+            }
+            
+        }elseif($info->ilosc_magazyn != '0'){
             echo<<<et
                 <form action="../script/dodajDoKoszyka.php" method='post'>
                     <input type="hidden" name='id' value="$produkt_id">
                     <input type="submit" value="Dodaj do koszyka">
                 </form>
             et;
+        }else{
+            echo<<<et
+                <form action="../script/dodajDoKoszyka.php" method='post'>
+                    <input type="hidden" name='id' value="$produkt_id">
+                    <input type="submit" value="Dodaj do koszyka" disabled> Nie ma produktu na stanie
+                </form>
+            et;
         }
 
         echo "</div>";
-                
+        
     ?>
 
         

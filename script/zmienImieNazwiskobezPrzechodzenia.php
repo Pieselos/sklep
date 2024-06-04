@@ -11,7 +11,6 @@
         $imie = $_POST['nazwisko'];
         $query = "UPDATE user SET imie = $imie, nazwisko = $nazwisko WHERE login = '$user'";
         $connect->query($query);
-        header("Location: http://localhost/sites/ustawieniaKonta.php");
-        exit;
+        
     }
     

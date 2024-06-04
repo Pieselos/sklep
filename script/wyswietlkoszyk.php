@@ -26,7 +26,7 @@ if (empty($_SESSION['user'])){
         $koszykId = $result->koszyk_id;
     }
     
-    $query = "SELECT nazwa, cena_brutto, ilosc_koszyk, zdj_glowne, produktKoszyk_id FROM produktkoszyk JOIN produkt USING(produkt_id) WHERE koszyk_id = $koszykId";
+    $query = "SELECT nazwa, cena_brutto, ilosc_koszyk, zdj_glowne, produkt_id, produktKoszyk_Id FROM produktkoszyk JOIN produkt USING(produkt_id) WHERE koszyk_id = $koszykId";
     $result = $connect->query($query);
     if(mysqli_num_rows($result)){
         $flagaPusty = 0;
@@ -34,13 +34,15 @@ if (empty($_SESSION['user'])){
         $iloscArray = array();
         $cenaArray = array();
         $zdjeciaArray = array();
-        $idProduktKoszyk = array();
+        $idProduktArray = array();
+        $produktKoszykIdArray = array();
         while($row = $result->fetch_object()){
             $nazwaArray[] = $row->nazwa;
             $iloscArray[] = $row->ilosc_koszyk;
             $cenaArray[] = $row->cena_brutto;
             $zdjeciaArray[] = "http://localhost/img/".$row->zdj_glowne;
-            $idProduktKoszykArray[] = $row->produktKoszyk_id;
+            $idProduktArray[] = $row->produkt_id;
+            $produktKoszykIdArray[] = $row->produktKoszyk_Id;
         }
     }else {
         $flagaPusty = 1;

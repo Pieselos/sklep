@@ -6,11 +6,24 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="koszyk.php">koszyk</a>
+    <a href="ustawieniaKonta.php">Ustawienia konta</a>
+    <a href='szukaj.php'>Szukaj</a>
+    <a href='index.php'>Index</a>
+    <?php
+        session_start();
+        if(empty($_SESSION['user'])){
+            echo "<a href='login.php'>Login</a>";
+        }else{
+            echo "<a href='logout.php'>logout</a>";
+        }
+
+    ?><br>
     <?php
         $connect=mysqli_connect("localhost","root","","sklep");
         
         require("../script/root.php");
-        session_start();
+        
         
 
         if (empty($_SESSION['user'])){
@@ -25,12 +38,12 @@
         }
 
 
-        $query = "SELECT adres, kod_pocztowy, miasto, telefon FROM user JOIN adres USING(adres_id) WHERE login = '$sesjaUser'";
+        $query = "SELECT adres, kod_pocztowy, miasto, telefon FROM user LEFT JOIN adres USING(adres_id) WHERE login = '$sesjaUser'";
         $result = $connect->query($query)->fetch_object();
-        $adresBaza = $result->adres;
-        $kodBaza = $result->kod_pocztowy;
-        $miastoBaza = $result->miasto;
-        $telefonBaza = $result->telefon;
+        @$adresBaza = $result->adres;
+        @$kodBaza = $result->kod_pocztowy;
+        @$miastoBaza = $result->miasto;
+        @$telefonBaza = $result->telefon;
         
     ?>
     
